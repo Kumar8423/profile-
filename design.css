@@ -310,13 +310,73 @@ h1 {
 }
 
 .chip {
-  padding: 0.45rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  position: relative;
+  padding: 0.55rem 1.5rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(124, 92, 251, 0.8); /* soft purple border */
+  background: rgba(15, 9, 40, 0.9);
   font-weight: 500;
   font-size: 0.95rem;
+  cursor: default;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
 }
+
+.chip:hover {
+  background: rgba(77, 163, 255, 0.08);
+  box-shadow: 0 0 12px rgba(77, 163, 255, 0.7);
+  transform: translateY(-1px);
+}
+
+.chip-icon {
+  font-size: 1rem;
+  color: #c1b7ff;
+}
+
+/* Tooltip popup for skills */
+.chip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: 130%;
+  transform: translateX(-50%);
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  background: #050615;
+  border: 1px solid #4da3ff;
+  color: #e9f5ff;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.chip::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 118%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #4da3ff transparent transparent transparent;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.chip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.chip:hover::before {
+  opacity: 1;
+}
+
 
 /* PROJECT CARD */
 .project-card {
